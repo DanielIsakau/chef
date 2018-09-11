@@ -1,0 +1,56 @@
+node1 Starting Chef Client, version 14.4.56[0m
+node1 resolving cookbooks for run list: ["nginx", "yum", "nginx-repo"][0m
+node1 Synchronizing Cookbooks:[0m
+node1   - nginx (0.1.0)[0m
+node1   - nginx-repo (0.1.2)[0m
+node1   - yum (5.1.0)[0m
+node1 Installing Cookbook Gems:[0m
+node1 Compiling Cookbooks...[0m
+node1 [0m
+node1 ================================================================================[0m
+node1 [31mRecipe Compile Error in /var/chef/cache/cookbooks/nginx/recipes/default.rb[0m
+node1 ================================================================================[0m
+node1 
+node1 [0mNoMethodError[0m
+node1 -------------[0m
+node1 undefined method `[]' for nil:NilClass[0m
+node1 
+node1 [0mCookbook Trace:[0m
+node1 ---------------[0m
+node1   /var/chef/cache/cookbooks/nginx/recipes/default.rb:29:in `block in from_file'
+node1 [0m  /var/chef/cache/cookbooks/nginx/recipes/default.rb:27:in `from_file'[0m
+node1 
+node1 [0mRelevant File Content:[0m
+node1 ----------------------[0m
+node1 /var/chef/cache/cookbooks/nginx/recipes/default.rb:
+node1 [0m
+node1 [0m 22:              port_jboss: node['jboss']['port'],
+node1 [0m 23:              dest_app: node['jboss']['path'])
+node1 [0m 24:    notifies :restart, 'service[nginx]'
+node1 [0m 25:  end
+node1 [0m 26:  
+node1 [0m 27:  template '/usr/share/nginx/html/info.html' do
+node1 [0m 28:    source 'info.erb'
+node1 [0m 29>>   variables(info: search(:nginx_bag, 'id:nginx_bag')[0]['key'])
+node1 [0m 30:    notifies :restart, "service[nginx]"
+node1 [0m 31:  end
+node1 [0m 32:  [0m
+node1 
+node1 [0mSystem Info:[0m
+node1 ------------[0m
+node1 chef_version=14.4.56
+node1 [0mplatform=centos
+node1 [0mplatform_version=7.4.1708
+node1 [0mruby=ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux]
+node1 [0mprogram_name=/usr/bin/chef-client
+node1 [0mexecutable=/opt/chef/bin/chef-client[0m
+node1 
+node1 [0m[0m
+node1 Running handlers:[0m
+node1 [2018-09-11T21:52:34+01:00] ERROR: Running exception handlers
+node1 Running handlers complete
+node1 [0m[2018-09-11T21:52:34+01:00] ERROR: Exception handlers complete
+node1 Chef Client failed. 0 resources updated in 07 seconds[0m
+node1 [2018-09-11T21:52:35+01:00] FATAL: Stacktrace dumped to /var/chef/cache/chef-stacktrace.out
+node1 [2018-09-11T21:52:35+01:00] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report
+node1 [2018-09-11T21:52:35+01:00] FATAL: NoMethodError: undefined method `[]' for nil:NilClass
